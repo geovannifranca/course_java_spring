@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import course.example.course.entities.pk.OrderItemPk;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 import java.io.Serial;
@@ -17,6 +16,7 @@ public class OrderItem implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
+    @JsonIgnore
     @EmbeddedId
     private final OrderItemPk id = new OrderItemPk();
 
@@ -34,6 +34,7 @@ public class OrderItem implements Serializable {
         this.price = price;
     }
 
+
     @JsonIgnore
     public Order getOrder() {
         return id.getOrder();
@@ -47,7 +48,7 @@ public class OrderItem implements Serializable {
         return id.getProduct();
     }
 
-    public  void setProduct(Product product) {
+    public void setProduct(Product product) {
         id.setProduct(product);
     }
 

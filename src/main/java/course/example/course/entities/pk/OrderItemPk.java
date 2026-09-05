@@ -1,5 +1,6 @@
 package course.example.course.entities.pk;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import course.example.course.entities.Order;
 import course.example.course.entities.Product;
 import jakarta.persistence.Embeddable;
@@ -15,10 +16,12 @@ public class OrderItemPk implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;

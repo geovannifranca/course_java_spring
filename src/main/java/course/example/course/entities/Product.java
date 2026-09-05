@@ -31,6 +31,10 @@ public class Product implements Serializable {
     )
     private final Set<Category> categories = new HashSet<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items = new HashSet<>();
+
     public Product() {
     }
 
@@ -84,6 +88,15 @@ public class Product implements Serializable {
 
     public Set<Category> getCategories() {
         return categories;
+    }
+
+    @JsonIgnore
+    public Set<Order> getOrder() {
+        Set<Order> set = new HashSet<>();
+        for (OrderItem x : items) {
+            set.add(x.getOrder());
+        }
+        return set;
     }
 
     @Override
