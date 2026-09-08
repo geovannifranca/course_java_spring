@@ -2,6 +2,7 @@ package course.example.course.services;
 
 import course.example.course.entities.User;
 import course.example.course.repositories.UserRepository;
+import course.example.course.services.exceptions.ResourceNotFoundException;
 import org.jspecify.annotations.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,7 +23,7 @@ public class UserService {
 
     public  User findById(Long id){
         Optional<User> obj = repository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public User insert(User user){
